@@ -1,3 +1,4 @@
+/* Main application container */
 .App {
   position: absolute;
   top: 0;
@@ -6,30 +7,56 @@
   right: 0;
   text-align: center;
   height: 100%;
+  width: 100%;
   padding: 1rem;
-  background-color: #bfddff;
+  background-color: #f0f4ff; /* Soft light background for better contrast */
 }
 
-/* primary: #052f5f
-
-secondary: #fffd9c */
-
+/* Logo size */
 .App-logo {
   height: 50vmin;
   margin-bottom: 1rem;
 }
 
+/* Header styling */
 .App-header {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  font-size: 0.75rem;
+  font-size: 0.875rem; /* Slightly larger for readability */
+  color: #052f5f; /* Dark blue for header text */
 }
 
+/* Code block styling */
 code {
-  background: rgba(148, 163, 184, 0.5);
+  background: rgba(148, 163, 184, 0.5); /* Keep this color for code block background */
   border-radius: 0.25rem;
   padding: 0.2rem 0.5rem;
+  color: #333; /* Darker text for better readability */
+}
+
+/* Primary button styles */
+button {
+  background-color: #052f5f; /* Primary dark blue */
+  color: #ffffff; /* White text for contrast */
+  border: none;
+  border-radius: 0.5rem; /* Rounded corners */
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem; /* Slightly larger text */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+button:hover {
+  background-color: #ff7a00; /* Bright orange on hover for action feedback */
+}
+
+/* Secondary color styles */
+.secondary {
+  background-color: #fffd9c; /* Soft yellow */
+  color: #052f5f; /* Dark blue for text */
+  padding: 0.5rem;
+  border-radius: 0.25rem;
 }

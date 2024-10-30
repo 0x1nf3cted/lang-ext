@@ -3,7 +3,9 @@ import { useStorage, withErrorBoundary, withSuspense } from '@extension/shared';
 import { exampleThemeStorage } from '@extension/storage';
 import type { ComponentPropsWithoutRef } from 'react';
 import { Link } from 'react-router-dom';
-import { MdArrowBack } from "react-icons/md";
+import { MdArrowBack } from 'react-icons/md';
+import Language from '@src/components/Language';
+import Privacy from '@src/components/Privacy';
 
 const notificationOptions = {
   type: 'basic',
@@ -41,25 +43,15 @@ const SettingsPage = () => {
 
   return (
     <div className={`App ${isLight ? 'bg-slate-50' : 'bg-gray-800'}`}>
-
-        <Link to="/"><MdArrowBack size={24} color='white' /></Link>
-      {/* <header className={`App-header ${isLight ? 'text-gray-900' : 'text-gray-100'}`}>
-        <button onClick={goGithubSite}>
-          <img src={chrome.runtime.getURL(logo)} className="App-logo" alt="logo" />
-        </button>
-        <p>
-          Edit <code>pages/popup/src/Popup.tsx</code>
-        </p>
-        <button
-          className={
-            'font-bold mt-4 py-1 px-4 rounded shadow hover:scale-105 ' +
-            (isLight ? 'bg-blue-200 text-black' : 'bg-gray-700 text-white')
-          }
-          onClick={injectContentScript}>
-          Click to inject Content Script
-        </button>
-        <ToggleButton>Toggle theme nnnn</ToggleButton>
-      </header> */}
+      <Link to="/">
+        <MdArrowBack size={24} color="black" />
+      </Link>
+      <div className="mt-10 mb-4">
+        <Language />
+      </div>
+      <div className="mb-4">
+        <Privacy />
+      </div>
     </div>
   );
 };

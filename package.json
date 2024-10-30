@@ -31,6 +31,7 @@
     "update-version": "bash update_version.sh"
   },
   "dependencies": {
+    "@nlpjs/core": "^4.26.1",
     "axios": "^1.7.7",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "react": "18.3.1",
@@ -39,7 +40,7 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.270",
-    "@types/node": "^20.16.5",
+    "@types/node": "^20.16.10",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/uuid": "^10.0.0",
@@ -62,10 +63,12 @@
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.11",
+    "ts-node": "^10.9.2",
     "tslib": "^2.6.3",
     "turbo": "^2.0.12",
     "typescript": "5.5.4",
-    "vite": "5.4.3"
+    "vite": "5.4.3",
+    "vite-plugin-node-polyfills": "^0.22.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json}": [

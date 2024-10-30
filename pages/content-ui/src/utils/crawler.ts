@@ -189,7 +189,7 @@ function extractImportantElements(element: HTMLElement, relevantElements: ChildN
 export function extractContentFromPage(): HTMLElement[] {
   const relevantElements: HTMLElement[] = [];
 
-  const relevantSelectors = ['main'];
+  const relevantSelectors = ['main', 'div', 'section', 'article'];
 
   relevantSelectors.forEach(selector => {
     const elements = document.querySelectorAll(selector);

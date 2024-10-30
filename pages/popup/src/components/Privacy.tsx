@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Switch, { SwitchProps } from '@mui/material/Switch';
-import { FaCirclePlus } from "react-icons/fa6";
+import { FaCirclePlus } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { addWebsite, deleteWebsite } from '@src/utils/blacklist';
 import { BlockedWebsite } from '@src/pages/BlockedWebsites';
@@ -23,9 +23,6 @@ const IOSSwitch = styled((props: SwitchProps) => (
         backgroundColor: '#65C466',
         opacity: 1,
         border: 0,
-        ...theme.applyStyles('dark', {
-          backgroundColor: '#2ECA45',
-        }),
       },
       '&.Mui-disabled + .MuiSwitch-track': {
         opacity: 0.5,
@@ -34,18 +31,6 @@ const IOSSwitch = styled((props: SwitchProps) => (
     '&.Mui-focusVisible .MuiSwitch-thumb': {
       color: '#33cf4d',
       border: '6px solid #fff',
-    },
-    '&.Mui-disabled .MuiSwitch-thumb': {
-      color: theme.palette.grey[100],
-      ...theme.applyStyles('dark', {
-        color: theme.palette.grey[600],
-      }),
-    },
-    '&.Mui-disabled + .MuiSwitch-track': {
-      opacity: 0.7,
-      ...theme.applyStyles('dark', {
-        opacity: 0.3,
-      }),
     },
   },
   '& .MuiSwitch-thumb': {
@@ -60,18 +45,14 @@ const IOSSwitch = styled((props: SwitchProps) => (
     transition: theme.transitions.create(['background-color'], {
       duration: 500,
     }),
-    ...theme.applyStyles('dark', {
-      backgroundColor: '#39393D',
-    }),
   },
 }));
 
 function Privacy() {
-  const [url, setUrl] = useState<string>("");
+  const [url, setUrl] = useState<string>('');
   const [nsfw, setNsfw] = useState<boolean>(false);
   const [isCurrentWebsiteBlocked, setIsCurrentWebsiteBlocked] = useState<boolean>(false);
 
-  // Toggles the blocking of the current website
   const blockCurrentWebsite = async () => {
     if (isCurrentWebsiteBlocked) {
       deleteWebsite(url);
@@ -88,22 +69,20 @@ function Privacy() {
       if (tabs[0] && tabs[0].url) {
         const currentTabUrl = tabs[0].url;
         const domain = new URL(currentTabUrl);
-        const host = domain.hostname; // Get the hostname
+        const host = domain.hostname;
         setUrl(host);
 
-        // Check if the website is blocked
-        chrome.storage.sync.get(['blockedWebsite'], (result) => {
+        chrome.storage.sync.get(['blockedWebsite'], result => {
           const existingWebsites: BlockedWebsite[] = result.blockedWebsite || [];
           const isBlocked = existingWebsites.some(website => website.website === host);
           setIsCurrentWebsiteBlocked(isBlocked);
         });
       }
     };
-    
+
     fetchUrl();
 
-    // Fetch saved NSFW setting from Chrome storage
-    chrome.storage.sync.get(['nsfw'], (result) => {
+    chrome.storage.sync.get(['nsfw'], result => {
       if (result.nsfw !== undefined) {
         setNsfw(result.nsfw);
       }
@@ -113,30 +92,33 @@ function Privacy() {
   const handleNsfw = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newNsfwValue = event.target.checked;
     setNsfw(newNsfwValue);
-
-    // Save the updated NSFW setting to Chrome storage
-    chrome.storage.sync.set({ nsfw: newNsfwValue }, () => {
-      if (chrome.runtime.lastError) {
-        console.error("Error saving NSFW setting:", chrome.runtime.lastError);
-      }
-    });
+    chrome.storage.sync.set({ nsfw: newNsfwValue });
   };
 
   return (
-    <div className='flex flex-col w-full bg-blue-700 gap-y-6 rounded-md p-2 mt-4'>
-      <h1 className='text-xl text-white'>Privacy</h1>
-      <div className='flex w-full flex-row justify-between items-center'>
-        <p className='text-white text-md'>NSFW language filter</p>
+    <div className="p-4 bg-white border rounded-md shadow-md text-sm">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-4">
+        <strong className="text-gray-700">Privacy Settings</strong>
+      </div>
+
+      {/* NSFW Language Filter */}
+      <div className="flex justify-between items-center mb-4">
+        <p className="text-gray-600 font-bold">NSFW Language Filter:</p>
         <IOSSwitch checked={nsfw} onChange={handleNsfw} />
       </div>
-      <div className='flex w-full flex-row justify-between items-center'>
-        <p className='text-white text-md'>Block this website</p>
+
+      {/* Block Current Website */}
+      <div className="flex justify-between items-center mb-4">
+        <p className="text-gray-600 font-bold">Block This Website:</p>
         <IOSSwitch checked={isCurrentWebsiteBlocked} onChange={blockCurrentWebsite} />
       </div>
-      <div className='flex w-full flex-row justify-between items-center'>
-        <p className='text-white text-md'>Block websites</p>
+
+      {/* Block Websites Link */}
+      <div className="flex justify-between items-center">
+        <p className="text-gray-600 font-bold">Manage Blocked Websites:</p>
         <Link to="/blocked">
-          <FaCirclePlus size={24} color='white' className='cursor-pointer self-center mr-2' />
+          <FaCirclePlus size={24} className="cursor-pointer text-gray-600" />
         </Link>
       </div>
     </div>
